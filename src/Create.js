@@ -1,13 +1,13 @@
 import { useState } from "react";
 import useFetch from "./useFetch";
-import { useNavigate, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 const Create = () => {
 	const [title, setTitle] = useState("");
 	const [body, setBody] = useState("");
 	const [author, setAuthor] = useState("mario");
 	const [isPending, setIsPending] = useState(false);
-	const navigate = useNavigate();
+	const history = useHistory();
 
 	const { id } = useParams();
 	const { data: blog, isPending1, error } = useFetch("http://localhost:8000/blogs/" + id);
@@ -23,7 +23,8 @@ const Create = () => {
 		}).then(() => {
 			console.log("New blog added");
 			setIsPending(false);
-			navigate.push("/"); 
+			// navigate.push("/"); 
+            history.push('/');
 		});
     }
 
